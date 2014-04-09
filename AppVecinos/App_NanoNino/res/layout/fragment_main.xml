@@ -17,7 +17,7 @@
 		android:layout_marginTop="42dp"
 		android:minHeight="30dp"
 		android:text="@string/loginText"
-		android:onClick="btnEnviar" />
+		android:onClick="btnLogin" />
 
 	<EditText
 		android:id="@+id/usuarioInput"

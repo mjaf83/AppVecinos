@@ -20,22 +20,29 @@ public class ContactActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contact);
-		Intent intent=getIntent();
-		String message = intent.getStringExtra(MainActivity.EXTRA_TOKEN);
-		TextView txtCambiado = ((TextView)findViewById(R.id.resultado));
-        txtCambiado.setText("atope");
+		
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
+			
 		}
+		Intent intent=getIntent();
+		//String message = intent.getStringExtra(MainActivity.Token);
+	
 	}
 
-
+@Override
+protected void onPostCreate(Bundle savedInstanceState) {
+	// TODO Auto-generated method stub
+	TextView txtCambiado = ((TextView)findViewById(R.id.button1));
+	
+    txtCambiado.setText("atope");
+	super.onPostCreate(savedInstanceState);
+}
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
 	public static class PlaceholderFragment extends Fragment {
-
 		public PlaceholderFragment() {
 		}
 
@@ -44,6 +51,7 @@ public class ContactActivity extends ActionBarActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_contact,
 					container, false);
+		
 			return rootView;
 		}
 	}

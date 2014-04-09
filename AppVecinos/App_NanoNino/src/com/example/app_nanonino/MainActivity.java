@@ -70,7 +70,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	}
     
-    public void btnEnviar(View v) {
+    public void btnLogin(View v) {
     	ConexionServidor task = new ConexionServidor();
     	task.execute(new String[] { "" });
         Intent intent = new Intent(this, ContactActivity.class);
