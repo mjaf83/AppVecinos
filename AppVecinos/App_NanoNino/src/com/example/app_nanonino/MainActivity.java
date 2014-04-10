@@ -71,8 +71,58 @@ public class MainActivity extends ActionBarActivity {
 	}
     
     public void btnLogin(View v) {
-    	ConexionServidor task = new ConexionServidor();
-    	task.execute(new String[] { "" });
+    	//ConexionServidor task = new ConexionServidor();
+    	//task.execute(new String[] { "" });
+    	String respuesta = "";
+    	
+        // Inicializar, creando HttpClient y Post Header
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("http://www.appadia.com/prueba/login");
+
+        try {
+        	final String usuario = ((EditText)findViewById(R.id.usuarioInput)).getText().toString();
+        	final String pass = ((EditText)findViewById(R.id.contrasenyaInput)).getText().toString();
+        	
+            // Agregar parámetros
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            nameValuePairs.add(new BasicNameValuePair("user", "prueba1@test.com"));
+            nameValuePairs.add(new BasicNameValuePair("pass",getStringMessageDigest("test1h") ));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+            // Ejecutar la petición HTTP Post
+            HttpResponse response = httpclient.execute(httppost);
+            
+            // Obtener respuesta del servidor
+            InputStream is=response.getEntity().getContent();
+            
+            //Colocar datos en un String
+            String datos = convertStreamToString(is);
+            respuesta=datos;
+        } catch (ClientProtocolException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+    	JSONObject jObject= new JSONObject(respuesta);
+		Boolean success=jObject.getBoolean("success");
+		if(success)
+			{
+		    Token = jObject.getString("token");
+		
+			}
+		else
+			{
+			//TODO Mostrar mensaje error
+			
+			}
+		
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         Intent intent = new Intent(this, ContactActivity.class);
         intent.putExtra(EXTRA_TOKEN, Token);
         startActivity(intent);
@@ -81,73 +131,14 @@ public class MainActivity extends ActionBarActivity {
     
 
 
-    private class ConexionServidor extends AsyncTask<String, Void, String> {
-		@Override
-		protected String doInBackground(String... urls) {
-			String respuesta = "";
-	    	
-	        // Inicializar, creando HttpClient y Post Header
-	        HttpClient httpclient = new DefaultHttpClient();
-	        HttpPost httppost = new HttpPost("http://www.appadia.com/prueba/login");
 
-	        try {
-	        	final String usuario = ((EditText)findViewById(R.id.usuarioInput)).getText().toString();
-	        	final String pass = ((EditText)findViewById(R.id.contrasenyaInput)).getText().toString();
-	        	
-	            // Agregar parámetros
-	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-	            nameValuePairs.add(new BasicNameValuePair("user", "prueba1@test.com"));
-	            nameValuePairs.add(new BasicNameValuePair("pass",getStringMessageDigest("test1h") ));
-	            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-	            // Ejecutar la petición HTTP Post
-	            HttpResponse response = httpclient.execute(httppost);
-	            
-	            // Obtener respuesta del servidor
-	            InputStream is=response.getEntity().getContent();
-	            
-	            //Colocar datos en un String
-	            String datos = convertStreamToString(is);
-	            respuesta=datos;
-	        } catch (ClientProtocolException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
-	        return respuesta;
-		}
-	    
-		@Override
-		protected void onPostExecute(String result) {
-			try {
-				JSONObject jObject= new JSONObject(result);
-				Boolean success=jObject.getBoolean("success");
-				if(success)
-					{
-				    Token = jObject.getString("token");
-					}
-				else
-					{
-					//TODO Mostrar mensaje error
-					
-					}
-					
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		}
-
-	}
 
 
     /*
      * La función convertStreamToString() fue tomada de:
      * http://senior.ceng.metu.edu.tr/2009/praeda/2009/01/11/a-simple-restful-client-at-android/
      */
-    private static String convertStreamToString(InputStream is) {
+    public static String convertStreamToString(InputStream is) {
         /*
          * To convert the InputStream to String we use the BufferedReader.readLine()
          * method. We iterate until the BufferedReader return null which means
