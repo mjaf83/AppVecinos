@@ -129,7 +129,7 @@ private class ConexionServidor extends AsyncTask<String, Void, String> {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
-			 	ListView lista = (ListView)findViewById(android.R.id.list);
+			 	ListView lista = (ListView)findViewById(R.id.list);
 				adaptador=new  ObjVecinosAdapter(ContactActivity.this,listadoVecinos);
 				lista.setAdapter(adaptador);
 		}
