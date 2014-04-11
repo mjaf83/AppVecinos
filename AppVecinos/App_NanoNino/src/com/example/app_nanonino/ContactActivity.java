@@ -19,25 +19,41 @@ import org.json.JSONObject;
 
 
 
+
+
+
+
+
+
+
+import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.os.Build;
 
 public class ContactActivity extends ActionBarActivity {
 	 private ArrayList<ObjVecinos> listadoVecinos;
 	 private ObjVecinosAdapter adaptador;
+	 
+
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +67,13 @@ public class ContactActivity extends ActionBarActivity {
 			ConexionServidor conexion= new ConexionServidor();
 			
 			conexion.execute();
-			
+
+	     
+
+
 		}
 	}
-/*
-@Override
-protected void onPostCreate(Bundle savedInstanceState) {
-	// TODO Auto-generated method stub
-	Intent intent=getIntent();
-	String message = intent.getStringExtra(MainActivity.EXTRA_TOKEN);
-	TextView txtCambiado = ((TextView)findViewById(R.id.button1));
-	
-    txtCambiado.setText(message);
-	super.onPostCreate(savedInstanceState);
-}*/
+	 
 
 
 private class ConexionServidor extends AsyncTask<String, Void, String> {
@@ -153,5 +162,7 @@ private class ConexionServidor extends AsyncTask<String, Void, String> {
 			return rootView;
 		}
 	}
+	
+
 
 }
