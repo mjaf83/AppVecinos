@@ -147,6 +147,7 @@ private class ConexionServidor extends AsyncTask<String, Void, String> {
 						e.printStackTrace();
 					}
 			   abreLista();
+			   LoginActivity.this.finish();
 		
 		}
 	}

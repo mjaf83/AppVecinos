@@ -40,13 +40,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class ContactListActivity extends ActionBarActivity implements
-		ActionBar.TabListener, Fragment_Lista.OnBaseGetContact, Fragment_Lista.Callbacks  {
+		ActionBar.TabListener {
 
 	
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	
-	 private ArrayList<ObjVecinos> listadoVecinos;
-	 public final static String EXTRA_TOKEN = "Guardados";
+
+	 public final static String EXTRA_TOKEN = "TOKEN";
 
 	 
 		public final static String EXTRA_NOMBRE = "ObjVecinos.NOMBRE";
@@ -93,10 +93,7 @@ public class ContactListActivity extends ActionBarActivity implements
 				});
 
 
-		//Conecto con el servidor mediante una clase asyntask auxiliar y hago una peticion mediante post
-		listadoVecinos=new ArrayList<ObjVecinos>(); 
-		ConexionServidor conexion= new ConexionServidor();
-		conexion.execute();
+
 		
 		
 		//Creo y añado los iconos a los tabs del actionBar
@@ -134,41 +131,6 @@ public class ContactListActivity extends ActionBarActivity implements
 	@Override
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
-		
-		 if (tab.getPosition() == 0) {
-					 Bundle arguments = new Bundle();
-					  arguments.putString(EXTRA_TOKEN, "guardado");
-					  Fragment_Lista ListFragment = new Fragment_Lista();
-					  ListFragment.setArguments(arguments);
-					  getSupportFragmentManager().beginTransaction().replace(R.id.container, ListFragment).commit();
-		   	 }/*
-		     else if (tab.getPosition() == 1) {
-		    	 
-		    	      Bundle arguments = new Bundle();
-					  arguments.putString(EXTRA_TOKEN, "guardado");
-					  Fragment_Lista ListFragment = new Fragment_Lista();
-					  ListFragment.setArguments(arguments);
-		    	      getSupportFragmentManager().beginTransaction().replace(R.id.container, ListFragment).commit();
-	}   
-		     else if (tab.getPosition() == 2) {
-			    	 	Bundle arguments = new Bundle();
-			    	 	arguments.putString(EXTRA_TOKEN, "guardado");
-			    	 	Fragment_Lista ListFragment = new Fragment_Lista();
-			    	 	ListFragment.setArguments(arguments);
-			    	 	getSupportFragmentManager().beginTransaction().replace(R.id.container, ListFragment).commit(); }
-			      
-		      
-		      
-		      
-		     else {
-		       
-		    	 Bundle arguments = new Bundle();
-				  arguments.putString(EXTRA_TOKEN, "guardado");
-				  Fragment_Lista ListFragment = new Fragment_Lista();
-				  ListFragment.setArguments(arguments);
-	    	      getSupportFragmentManager().beginTransaction().replace(R.id.container, ListFragment).commit();
-	    	      }*/
-		
 		mViewPager.setCurrentItem(tab.getPosition());
 	}
 
@@ -194,16 +156,64 @@ public class ContactListActivity extends ActionBarActivity implements
 
 		@Override
 		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a PlaceholderFragment (defined as a static inner class
-			// below).
-			return PlaceholderFragment.newInstance(position + 1);
+			Bundle arguments;
+			Intent intent;
+			String token="";
+			Fragment_Lista ListFragment = null;
+			if(position<3)
+			{
+				switch(position)
+				{
+				case 0 :		  
+							arguments = new Bundle();
+							intent=getIntent();
+							//Recupera la informacion del token para pasarsela al fragment para hacer la conexion
+				        	
+							token= intent.getStringExtra(LoginActivity.EXTRA_TOKEN);
+							arguments.putString(EXTRA_TOKEN, token);
+							ListFragment = new Fragment_Lista();
+							ListFragment.setArguments(arguments);
+					    	break;    
+				case 1 :		  
+					arguments = new Bundle();
+					intent=getIntent();
+					//Recupera la informacion del token para pasarsela al fragment para hacer la conexion
+		        	
+					token= intent.getStringExtra(LoginActivity.EXTRA_TOKEN);
+					arguments.putString(EXTRA_TOKEN, token);
+					ListFragment = new Fragment_Lista();
+					ListFragment.setArguments(arguments);
+			    	break;  
+				case 2 :		  
+					arguments = new Bundle();
+					intent=getIntent();
+					//Recupera la informacion del token para pasarsela al fragment para hacer la conexion
+		        	
+					token= intent.getStringExtra(LoginActivity.EXTRA_TOKEN);
+					arguments.putString(EXTRA_TOKEN, token);
+					ListFragment = new Fragment_Lista();
+					ListFragment.setArguments(arguments);
+			    	break;
+			   default:	arguments = new Bundle();
+					intent=getIntent();
+					//Recupera la informacion del token para pasarsela al fragment para hacer la conexion
+		        	
+					token= intent.getStringExtra(LoginActivity.EXTRA_TOKEN);
+					arguments.putString(EXTRA_TOKEN, token);
+					ListFragment = new Fragment_Lista();
+					ListFragment.setArguments(arguments);
+			    	break;    
+		}
+			
+			}
+			
+			return ListFragment;
 		}
 
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 3;
+			return 1;
 		}
 
 		@Override
@@ -221,126 +231,7 @@ public class ContactListActivity extends ActionBarActivity implements
 		}
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		private static final String ARG_SECTION_NUMBER = "section_number";
 
-		/**
-		 * Returns a new instance of this fragment for the given section number.
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_contact_list,
-					container, false);
-			TextView textView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			textView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-	}
-
-	
-	
-
-
-private class ConexionServidor extends AsyncTask<String, Void, String> {
-
-		@Override
-		protected String doInBackground(String... urls) {
-			String respuesta = "";
-	    	
-	        // Inicializar, creando HttpClient y Post Header
-	        HttpClient httpclient = new DefaultHttpClient();
-	        HttpPost httppost = new HttpPost("http://appadia.com/prueba/list");
-
-	        try {
-	        	
-	            // Agregar parámetros
-	        	Intent intent=getIntent();
-	        	String token= intent.getStringExtra(LoginActivity.EXTRA_TOKEN);
-	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-	            nameValuePairs.add(new BasicNameValuePair("token", token));
-	            nameValuePairs.add(new BasicNameValuePair("limit", "20"));
-	            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-	            // Ejecutar la petición HTTP Post
-	            HttpResponse response = httpclient.execute(httppost);
-	            
-	            // Obtener respuesta del servidor
-	            InputStream is=response.getEntity().getContent();
-	            
-	            //Colocar datos en un String
-	            String datos = LoginActivity.convertStreamToString(is);
-	            
-	            respuesta = datos;
-
-	        } catch (ClientProtocolException e) {
-	            e.printStackTrace();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	        return respuesta;
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			 try {
-			    	JSONObject jObject= new JSONObject(result);
-			    	JSONArray jsonArray = jObject.getJSONArray("results");//.getJSONObject(1).getString("nombre");
-					for(int i=0; i< jsonArray.length();i++)
-					{
-						try{
-							JSONObject json = jsonArray.getJSONObject(i);
-							ObjVecinos aux=new ObjVecinos(json.getString("nombre"), json.getString("apellido"), json.getString("telephonenumber"),  json.getString("email"),  json.getString("calle"),  json.getString("image"), Double.parseDouble(json.getString("")),  Double.parseDouble(json.getString("")));
-							listadoVecinos.add(aux);
-							
-						}
-						catch(JSONException e){
-							e.printStackTrace();
-						}
-
-					
-						
-					}
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-	
-				
-		}
-	}
-
-public  ArrayList<ObjVecinos> getContacts(){
-	
-	return listadoVecinos; 
-}
-
-
-
-@Override
-public void onEntradaSelecionada(String id) {
-	// TODO Auto-generated method stub
-	
-}
 }
 
 

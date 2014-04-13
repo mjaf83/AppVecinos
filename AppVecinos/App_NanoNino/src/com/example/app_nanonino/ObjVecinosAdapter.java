@@ -15,11 +15,10 @@ import android.widget.TextView;
 public abstract class ObjVecinosAdapter extends BaseAdapter{
 	 private ArrayList<ObjVecinos> listadoVecinos;
 	 private LayoutInflater lInflater;
-	 private Context context;
 	
-	 public ObjVecinosAdapter(Context contexto, ArrayList <ObjVecinos>vecinos){
-		 context=contexto;
-		 this.lInflater= LayoutInflater.from(context);
+	 public ObjVecinosAdapter(LayoutInflater lInflater, ArrayList <ObjVecinos>vecinos){
+		
+		 this.lInflater=lInflater;
 		 this.listadoVecinos=vecinos;
 		 
 	 }
@@ -45,7 +44,7 @@ public abstract class ObjVecinosAdapter extends BaseAdapter{
 		
 		if(view == null)
 		{
-			view=lInflater.inflate(R.layout.lista_vecinos,null);
+			view=lInflater.inflate(R.layout.layout_contact_element,null);
 		
 		}
 		onEntrada (listadoVecinos.get(posicion), view);
