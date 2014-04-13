@@ -38,14 +38,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.os.Build;
 
-public class MainActivity extends ActionBarActivity {
-	public final static String EXTRA_TOKEN = "com.example.myfirstapp.MESSAGE";
-	public static String Token = "";
+public class LoginActivity extends ActionBarActivity {
+	public final static String EXTRA_TOKEN = "com.example.app_nanonino.MESSAGE";
+	private String Token = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_login);
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -65,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
+			View rootView = inflater.inflate(R.layout.fragment_login, container,
 					false);
 			return rootView;
 		}
@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity {
     }
     public void abreLista(){
     	
-        Intent intent = new Intent(this, ContactActivity.class);
+        Intent intent = new Intent(this, ContactListActivity.class);
         intent.putExtra(EXTRA_TOKEN, Token);
         startActivity(intent);
     }

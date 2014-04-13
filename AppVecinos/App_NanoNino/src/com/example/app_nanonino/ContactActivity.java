@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 
 
+
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -36,6 +38,18 @@ import android.widget.TextView;
 import android.os.Build;
 
 public class ContactActivity extends ActionBarActivity {
+
+	public  static String EXTRA_NOMBRE = "ObjVecinos.NOMBRE";
+	public  static String EXTRA_APELLIDO = "ObjVecinos.APELLIDO";
+	public  static String EXTRA_TELEFONO = "ObjVecinos.TELEFONO";
+	public  static String EXTRA_EMAIL = "ObjVecinos.EMAIL";
+	public  static String EXTRA_DIRECCION = "ObjVecinos.DIRECCION";
+	public  static String EXTRA_URL = "ObjVecinos.URL";
+	public  static String EXTRA_LATITUD = "ObjVecinos.LATITUD";
+	public  static String EXTRA_LONGITUD = "ObjVecinos.LONGITUD";
+
+	
+	
 	 private ArrayList<ObjVecinos> listadoVecinos;
 	 private ObjVecinosAdapter adaptador;
 	 
@@ -81,7 +95,7 @@ private class ConexionServidor extends AsyncTask<String, Void, String> {
 	        	
 	            // Agregar parámetros
 	        	Intent intent=getIntent();
-	        	String token= intent.getStringExtra(MainActivity.EXTRA_TOKEN);
+	        	String token= intent.getStringExtra(LoginActivity.EXTRA_TOKEN);
 	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 	            nameValuePairs.add(new BasicNameValuePair("token", token));
 	            nameValuePairs.add(new BasicNameValuePair("limit", "20"));
@@ -94,7 +108,7 @@ private class ConexionServidor extends AsyncTask<String, Void, String> {
 	            InputStream is=response.getEntity().getContent();
 	            
 	            //Colocar datos en un String
-	            String datos = MainActivity.convertStreamToString(is);
+	            String datos = LoginActivity.convertStreamToString(is);
 	            
 	            respuesta = datos;
 
@@ -129,9 +143,10 @@ private class ConexionServidor extends AsyncTask<String, Void, String> {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
-			 	ListView lista = (ListView)findViewById(R.id.list);
-				adaptador=new  ObjVecinosAdapter(ContactActivity.this,listadoVecinos);
-				lista.setAdapter(adaptador);
+			 //	ListView lista = (ListView)findViewById(R.id.list);
+			//	adaptador=new  ObjVecinosAdapter(ContactActivity.this,listadoVecinos);
+			//	lista.setAdapter(adaptador);
+				
 		}
 	}
 
