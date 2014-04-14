@@ -1,6 +1,7 @@
 package com.example.app_nanonino;
 
 public class ObjVecinos {
+	private int id;
 	private String nombre;
 	private String apellido;
 	private String telefono;
@@ -11,9 +12,10 @@ public class ObjVecinos {
 	private double longt;
 	
 	
-	public ObjVecinos(String nombre, String apellido, String telefono,
+	public ObjVecinos(int  id, String nombre, String apellido, String telefono,
 			String email, String direccion, String url, double lat, double longt) {
 		super();
+		this.id=id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
@@ -24,6 +26,12 @@ public class ObjVecinos {
 		this.longt = longt;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getNombre() {
 		return nombre;

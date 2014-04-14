@@ -4,8 +4,11 @@
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
 	-->
-	<style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+	<style name="AppBaseTheme" parent="Theme.AppCompat.Light">
 		<!-- API 11 theme customizations can go here. -->
 	</style>
-
+   <!-- Tema para el color de las letras del login(verde) -->
+    <style name="ColorTema" parent="AppBaseTheme">                
+        <item name="backgroundStacked">#6B8F23</item>
+    </style>
 </resources>

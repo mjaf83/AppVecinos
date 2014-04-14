@@ -2,11 +2,12 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	tools:context="com.example.app_nanonino.ContactListActivity" >
+<item android:id="@+id/action_search" 
+	app:showAsAction="always"
+	android:title="Busca tu Vecino"
+	android:gravity="right"
+	android:icon="@android:drawable/ic_menu_search"
+	android:actionViewClass="android.widget.SearchView" />
 
-	<item
-		android:id="@+id/action_settings"
-		android:orderInCategory="100"
-		android:title="@string/action_settings"
-		app:showAsAction="never"/>
-
+	
 </menu>

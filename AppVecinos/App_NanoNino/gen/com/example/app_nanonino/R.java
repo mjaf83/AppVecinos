@@ -1081,7 +1081,8 @@ containing a value of this type.
         public static final int contactos=0x7f020058;
         public static final int guardados=0x7f020059;
         public static final int ic_launcher=0x7f02005a;
-        public static final int readme=0x7f02005b;
+        public static final int logo=0x7f02005b;
+        public static final int readme=0x7f02005c;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
@@ -1095,14 +1096,15 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050046;
+        public static final int action_search=0x7f050046;
+        public static final int action_settings=0x7f050047;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
         public static final int button1=0x7f050040;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
-        public static final int container=0x7f05003c;
+        public static final int container=0x7f05003d;
         public static final int contrasenyaInput=0x7f050041;
         public static final int default_activity_button=0x7f050028;
         public static final int dialog=0x7f05000e;
@@ -1117,15 +1119,15 @@ containing a value of this type.
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int list=0x7f05003e;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
         public static final int nombre_contacto=0x7f050045;
+        public static final int nombre_detalle=0x7f05003e;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
-        public static final int pager=0x7f05003d;
+        public static final int pager=0x7f05003c;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
@@ -1206,21 +1208,21 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030015;
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
-        public static final int activity_contact=0x7f030018;
-        public static final int activity_contact_list=0x7f030019;
+        public static final int activity_contact_list=0x7f030018;
+        public static final int activity_detalle=0x7f030019;
         public static final int activity_login=0x7f03001a;
-        public static final int fragment_contact=0x7f03001b;
+        public static final int fragment_contact_detail=0x7f03001b;
         public static final int fragment_contact_list=0x7f03001c;
-        public static final int fragment_login=0x7f03001d;
-        public static final int layout_contact_element=0x7f03001e;
-        public static final int lista_vecinos=0x7f03001f;
-        public static final int support_simple_spinner_dropdown_item=0x7f030020;
+        public static final int fragment_detalle=0x7f03001d;
+        public static final int fragment_login=0x7f03001e;
+        public static final int layout_contact_element=0x7f03001f;
+        public static final int lista_vecinos=0x7f030020;
+        public static final int support_simple_spinner_dropdown_item=0x7f030021;
     }
     public static final class menu {
-        public static final int contact=0x7f0c0000;
-        public static final int contact_list=0x7f0c0001;
-        public static final int list_contact=0x7f0c0002;
-        public static final int main=0x7f0c0003;
+        public static final int contact_list=0x7f0c0000;
+        public static final int detalle=0x7f0c0001;
+        public static final int main=0x7f0c0002;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1271,6 +1273,8 @@ containing a value of this type.
         public static final int loginText=0x7f0a0010;
         public static final int title_activity_contact=0x7f0a0013;
         public static final int title_activity_contact_list=0x7f0a0015;
+        public static final int title_activity_detalle=0x7f0a001b;
+        public static final int title_activity_fragmentdetalle=0x7f0a001a;
         public static final int title_activity_list_contact=0x7f0a0019;
         public static final int title_section1=0x7f0a0016;
         public static final int title_section2=0x7f0a0017;
@@ -1303,7 +1307,15 @@ containing a value of this type.
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f0b008c;
+        public static final int AppTheme=0x7f0b008d;
+        /**  Tema para el color de las letras del login(verde) 
+ Tema para el color de las letras del login(verde) 
+         */
+        public static final int ColorTema=0x7f0b008c;
+        public static final int CustomActionBarTheme=0x7f0b008e;
+        /**  Tema para el color de las letras del login(verde) 
+         */
+        public static final int MyActionBar=0x7f0b008f;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0b0063;

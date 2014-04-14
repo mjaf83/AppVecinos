@@ -3,10 +3,7 @@ package com.example.app_nanonino;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
-
 import java.util.List;
-import java.util.zip.Inflater;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -20,38 +17,53 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public  class Fragment_Lista extends ListFragment{
+
+
+
+public  class Fragment_Lista extends Fragment{
+	
+
+	public final static String EXTRA_ID = "ObjVecinos.ID"; 
+	public final static String EXTRA_NOMBRE = "ObjVecinos.NOMBRE";
+	public final static String EXTRA_APELLIDO = "ObjVecinos.APELLIDO";
+	public final static String EXTRA_TELEFONO = "ObjVecinos.TELEFONO";
+	public final static String EXTRA_EMAIL = "ObjVecinos.EMAIL";
+	public final static String EXTRA_DIRECCION = "ObjVecinos.DIRECCION";
+	public final static String EXTRA_URL = "ObjVecinos.URL";
+	public final static String EXTRA_LATITUD = "ObjVecinos.LATITUD";
+	public final static String EXTRA_LONGITUD = "ObjVecinos.LONGITUD";
+	
+	 private static ViewGroup container;
+	 private static LayoutInflater inflater;
 	 private ObjVecinosAdapter adapter;
 	 private ArrayList<ObjVecinos> listadoVecinos;
 	 private ListView viewVecinos;
-	 private LayoutInflater inflater; 
-	 ViewGroup container;
-	 ConexionServidor myasynctask;
+	 private ConexionServidor myasynctask;
 
+	 //private CallbackMostrarDetalle mCallbacks;
 	//El contructor debe ir vacio en un fragment
-	public Fragment_Lista(){
-		
+public Fragment_Lista(){
 	}
 	
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			listadoVecinos=new ArrayList<ObjVecinos>(); 
-			//Conecto con el servidor mediante una clase asyntask auxiliar y hago una peticion mediante post
-			inicializate();
+@Override
+public void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	listadoVecinos=new ArrayList<ObjVecinos>(); 
+	//Conecto con el servidor mediante una clase asyntask auxiliar y hago una peticion mediante post
+	inicializate();
 			
 			
 	}
@@ -61,32 +73,14 @@ public void inicializate(){
 	myasynctask.execute("");
 	
 }
-public void inicializate2(){
-	View rootView = inflater.inflate(R.layout.lista_vecinos,container, false);
-	viewVecinos = (ListView)rootView.findViewById(android.R.id.list);
-	adapter=new ObjVecinosAdapter(inflater,listadoVecinos) {
-		
-		@Override
-		public void onEntrada(Object entrada, View view) {
-			if (entrada!=null)
-			{
-			TextView text = (TextView)view.findViewById(R.id.nombre_contacto);	
-			text.setText( ((ObjVecinos) entrada).getApellido()+", "+((ObjVecinos) entrada).getNombre()); 
-            
-			}
 
-		
-		}
-		
-	};
-	viewVecinos.setAdapter(adapter);	
-}
 @Override
 public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		Bundle savedInstanceState) {
-	this.inflater=inflater;
 	View rootView = inflater.inflate(R.layout.lista_vecinos,container, false);
 	viewVecinos = (ListView)rootView.findViewById(android.R.id.list);
+	
+	// Se bindea la listView con la lista de contactos
 	adapter=new ObjVecinosAdapter(inflater,listadoVecinos) {
 		
 		@Override
@@ -102,18 +96,34 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		}
 		
 	};
-	viewVecinos.setAdapter(adapter);	
+	viewVecinos.setAdapter(adapter);
+	viewVecinos.setOnItemClickListener(new OnItemClickListener() { 
+			@Override
+			public void onItemClick(AdapterView<?> p, View view, int posicion, long id) {
+				DetalleActivity detalle;
+				Intent intent = new Intent(getActivity(), DetalleActivity.class);
+				     
+				Bundle arguments=new Bundle();
+				ObjVecinos contact = listadoVecinos.get(posicion);
+				intent.putExtra(EXTRA_ID, contact.getId());
+				intent.putExtra(EXTRA_NOMBRE, contact.getNombre());
+				intent.putExtra(EXTRA_APELLIDO, contact.getApellido());
+				intent.putExtra(EXTRA_TELEFONO, contact.getTelefono());
+				intent.putExtra(EXTRA_EMAIL, contact.getEmail());
+				intent.putExtra(EXTRA_DIRECCION, contact.getDireccion());
+				intent.putExtra(EXTRA_URL, contact.getUrl());
+				intent.putExtra(EXTRA_LATITUD, contact.getLat());
+				intent.putExtra(EXTRA_LONGITUD, contact.getLongt());
+				startActivity(intent);
+			  
+			}
+
+      });
+		
 	return rootView;
 }
 
 
-	@Override
-	public void onListItemClick(ListView listView, View view, int posicion, long id) {
-		super.onListItemClick(listView, view, posicion, id);
-		
-		// Notificar a la actividad, por medio de la interfaz del callback, que un elemento ha sido seleccionado
-		//mCallbacks.onEntradaSelecionada(mContactos.get(posicion).id);
-	}
 
 private class ConexionServidor extends AsyncTask<String, Void, String> {
 
@@ -162,7 +172,7 @@ private class ConexionServidor extends AsyncTask<String, Void, String> {
 					{
 						try{
 							JSONObject json = jsonArray.getJSONObject(i);
-							ObjVecinos aux=new ObjVecinos(json.getString("nombre"), json.getString("apellido"), json.getString("telephonenumber"),  json.getString("email"),  json.getString("calle"),  json.getString("image"),0,0);
+							ObjVecinos aux=new ObjVecinos(json.getInt("number"),json.getString("nombre"), json.getString("apellido"), json.getString("telephonenumber"),  json.getString("email"),  json.getString("calle"),  json.getString("image"),0,0);
 							listadoVecinos.add(aux);
 							
 						}
@@ -176,17 +186,21 @@ private class ConexionServidor extends AsyncTask<String, Void, String> {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
-			// inicializate2();
+			 try{
 			 adapter.notifyDataSetChanged();
-		
-			// inicializate();
-			
+			 }
+			 catch(Exception e){
+				 e.printStackTrace();
+				 
+			 }
 		}
 		
 		
 
 	}
-
-
-		
+/*
+public interface CallbackMostrarDetalle{
+public  void CallBackDetalle(Fragment detalle);
+}
+	*/	
 }
