@@ -1079,12 +1079,13 @@ containing a value of this type.
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
         public static final int alertas=0x7f020057;
         public static final int button=0x7f020058;
-        public static final int contactos=0x7f020059;
-        public static final int guardados=0x7f02005a;
-        public static final int ic_launcher=0x7f02005b;
-        public static final int logo=0x7f02005c;
-        public static final int readme=0x7f02005d;
-        public static final int rectangulo=0x7f02005e;
+        public static final int button_state=0x7f020059;
+        public static final int contactos=0x7f02005a;
+        public static final int guardados=0x7f02005b;
+        public static final int ic_launcher=0x7f02005c;
+        public static final int logo=0x7f02005d;
+        public static final int readme=0x7f02005e;
+        public static final int rectangulo=0x7f02005f;
     }
     public static final class id {
         public static final int DireccionDetalle=0x7f050049;
@@ -1283,7 +1284,9 @@ containing a value of this type.
         public static final int action_settings=0x7f0a000f;
         public static final int app_name=0x7f0a000d;
         public static final int coma=0x7f0a0014;
+        public static final int conexionbd=0x7f0a001c;
         public static final int contrasenyaText=0x7f0a0011;
+        public static final int error_conexion_bd=0x7f0a001d;
         public static final int hello_world=0x7f0a000e;
         public static final int loginText=0x7f0a0010;
         public static final int title_activity_contact=0x7f0a0013;

@@ -16,5 +16,6 @@
 	<string name="title_activity_list_contact">ListContactActivity</string>
 	<string name="title_activity_fragmentdetalle">ListContactActivity</string>
 	<string name="title_activity_detalle">DetalleActivity</string>
-
+	<string name="conexionbd">Contacto añadido</string>
+	<string name="error_conexion_bd">Contacto añadido</string>
 </resources>

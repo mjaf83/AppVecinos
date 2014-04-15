@@ -1,19 +1,6 @@
 package com.example.app_nanonino;
 
-
 import java.util.Locale;
-
-
-
-
-
-
-
-
-
-
-
-
 import com.example.app_nanonino.Fragment_Lista.CallbackMostrarDetalle;
 
 import android.support.v7.app.ActionBarActivity;
@@ -25,14 +12,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 
@@ -97,7 +80,6 @@ public class ContactListActivity extends ActionBarActivity implements
 		actionBar.addTab(actionBar.newTab().setIcon(R.drawable.alertas).setTabListener(this));	
 	
 
- 
 	
 		
 		
@@ -165,7 +147,6 @@ public class ContactListActivity extends ActionBarActivity implements
 
 		@Override
 		public Fragment getItem(int position) {
-			Boolean aux=false;
 			Bundle arguments;
 			Intent intent;
 			String token="";
@@ -271,7 +252,6 @@ public class ContactListActivity extends ActionBarActivity implements
 		startActivity(intent);
 		}
 	}
-
 
 
 }

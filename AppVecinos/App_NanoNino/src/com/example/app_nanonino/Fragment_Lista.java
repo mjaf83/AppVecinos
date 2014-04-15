@@ -2,6 +2,9 @@ package com.example.app_nanonino;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,15 +23,17 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,16 +44,6 @@ public  class Fragment_Lista extends Fragment{
 	CallbackMostrarDetalle mCallback;
 	
 
-	public final static String EXTRA_ID = "ObjVecinos.ID"; 
-	public final static String EXTRA_NOMBRE = "ObjVecinos.NOMBRE";
-	public final static String EXTRA_APELLIDO = "ObjVecinos.APELLIDO";
-	public final static String EXTRA_TELEFONO = "ObjVecinos.TELEFONO";
-	public final static String EXTRA_EMAIL = "ObjVecinos.EMAIL";
-	public final static String EXTRA_DIRECCION = "ObjVecinos.DIRECCION";
-	public final static String EXTRA_URL = "ObjVecinos.URL";
-	public final static String EXTRA_LATITUD = "ObjVecinos.LATITUD";
-	public final static String EXTRA_LONGITUD = "ObjVecinos.LONGITUD";
-	
 	 private ObjVecinosAdapter adapter;
 	 private ArrayList<ObjVecinos> listadoVecinos;
 	 private ListView viewVecinos;
@@ -66,8 +61,7 @@ public void onCreate(Bundle savedInstanceState) {
 	listadoVecinos=new ArrayList<ObjVecinos>(); 
 	//Conecto con el servidor mediante una clase asyntask auxiliar y hago una peticion mediante post
 	inicializate();
-			
-			
+				
 	}
 
 public void inicializate(){
@@ -89,6 +83,11 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		public void onEntrada(Object entrada, View view) {
 			if (entrada!=null)
 			{
+				//Carga la imagen en segundo plano
+			/*	
+			Bitmap map=downloadImage(((ObjVecinos)entrada).getUrl());
+			ImageView img = (ImageView)view.findViewById(R.id.imagenLista);
+			img.setImageBitmap(map);*/
 			TextView text = (TextView)view.findViewById(R.id.nombre_contacto);	
 			text.setText( ((ObjVecinos) entrada).getApellido()+", "+((ObjVecinos) entrada).getNombre()); 
             
@@ -203,7 +202,52 @@ public void onAttach(Activity activity) {
     }
 }
 
+
+
+//Cargar imagen en miniatura
+
+/*
+private Bitmap downloadImage(String url) {
+    Bitmap bitmap = null;
+    InputStream stream = null;
+    BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+    bmOptions.inSampleSize = 1;
+
+    try {
+        stream = getHttpConnection(url);
+        bitmap = BitmapFactory.
+                decodeStream(stream, null, bmOptions);
+        stream.close();
+    } catch (IOException e1) {
+        e1.printStackTrace();
+    }
+    return bitmap;
 }
+
+// Makes HttpURLConnection and returns InputStream
+private InputStream getHttpConnection(String urlString)
+        throws IOException {
+    InputStream stream = null;
+    URL url = new URL(urlString);
+    URLConnection connection = url.openConnection();
+
+    try {
+        HttpURLConnection httpConnection = (HttpURLConnection) connection;
+        httpConnection.setRequestMethod("GET");
+        httpConnection.connect();
+
+        if (httpConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            stream = httpConnection.getInputStream();
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return stream;
+}*/
+}
+
+
+
 
 
 

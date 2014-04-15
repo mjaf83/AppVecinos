@@ -121,7 +121,6 @@
 			android:layout_alignBottom="@+id/button2"
 			android:layout_toLeftOf="@+id/button2"
 			android:text="Email" 
-			android:background="@drawable/button"
 			android:textColor="#313131"
 			android:layout_marginRight="8dp"
 			android:textAppearance="?android:attr/textAppearanceMedium"/>
@@ -134,7 +133,6 @@
 			android:layout_alignBottom="@+id/button3"
 			android:layout_toLeftOf="@+id/button3"
 			android:text="Llamar" 
-			android:background="@drawable/button"
 			 android:textColor="#313131"
 			 android:layout_marginRight="8dp"
 			android:textAppearance="?android:attr/textAppearanceMedium"/>
@@ -147,8 +145,8 @@
 			android:layout_alignBottom="@+id/button1"
 			android:layout_toLeftOf="@+id/button1"
 			android:layout_marginRight="8dp"
+			android:onClick="GuardarContacto"
 			android:text="Guardar"
-			android:background="@drawable/button"
 			 android:textColor="#313131"
 			android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -158,10 +156,8 @@
 			android:layout_height="wrap_content"
 			android:layout_alignRight="@+id/View01"
 			android:layout_below="@+id/DireccionDetalle"
-			android:layout_marginRight="14dp"
 			android:layout_marginTop="18dp"
 			android:text="Ver"
-			android:background="@drawable/button"
 			 android:textColor="#313131"
 			android:textAppearance="?android:attr/textAppearanceMedium" />
 

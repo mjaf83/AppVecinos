@@ -6,18 +6,18 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+
 import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.Toast;
 
 public class DetalleActivity extends ActionBarActivity {
-	private Intent intent;
-	private ImageView imageView;
+
 	private FragmentDetalle fragment;
 	static private ObjVecinos contact=null;
 	@Override
@@ -33,7 +33,7 @@ public class DetalleActivity extends ActionBarActivity {
 					intent.getStringExtra(ContactListActivity.EXTRA_APELLIDO), 
 					intent.getStringExtra(ContactListActivity.EXTRA_TELEFONO),
 					intent.getStringExtra(ContactListActivity.EXTRA_EMAIL), 
-					intent.getStringExtra(ContactListActivity.EXTRA_DIRECCION),
+ 					intent.getStringExtra(ContactListActivity.EXTRA_DIRECCION),
 					intent.getStringExtra(ContactListActivity.EXTRA_URL), 
 					intent.getDoubleExtra(ContactListActivity.EXTRA_LATITUD,0),
 					intent.getDoubleExtra(ContactListActivity.EXTRA_LONGITUD,0));
@@ -48,10 +48,10 @@ public class DetalleActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, fragment,"DetalleFragment").commit();
 		}
-	//	imageView=getView().findViewById
+	
 		 //Carga la imagen en segundo plano
 		 CargarImagen conexionImage=new  CargarImagen( );
-		 conexionImage.execute(new String[]{intent.getStringExtra(Fragment_Lista.EXTRA_URL)});
+		 conexionImage.execute(new String[]{intent.getStringExtra(ContactListActivity.EXTRA_URL)});
 		 
 
 	
@@ -118,7 +118,7 @@ public class DetalleActivity extends ActionBarActivity {
 public void ChangeViewImage(Bitmap result){
 	try{
 	FragmentDetalle fragment=(FragmentDetalle)getSupportFragmentManager().findFragmentByTag("DetalleFragment");
-	fragment.changueView(result);
+	fragment.changeView(result);
 	}
 	catch(Exception e)
 	{
@@ -127,5 +127,16 @@ public void ChangeViewImage(Bitmap result){
 	}
 }
 
+public void GuardarContacto(View v){
+    		CreateDb conection;
+    		conection = new CreateDb(DetalleActivity.this);
+    		//en caso de producirse algun error en la inserccion, se muestra un error con un Toast
+    		if(conection.insertContact(contact)) {
+    				Toast.makeText(getApplicationContext(), R.string.conexionbd, Toast.LENGTH_LONG).show();
+    		
+    		}else {
+				Toast.makeText(getApplicationContext(), R.string.error_conexion_bd, Toast.LENGTH_LONG).show();
+    		}        		   	
+}
 
 }

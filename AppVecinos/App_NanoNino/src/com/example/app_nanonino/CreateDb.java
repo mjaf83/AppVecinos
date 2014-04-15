@@ -16,7 +16,7 @@ public class CreateDb extends SQLiteOpenHelper{
 	
 	private static final String TABLE_CONTACT = "CONTACTOS";
 	
-	private static final String[] COLUMNS_CONTACT = {"_id","nombre", "apellidos", "telefono","email","direccion", "URL", "latitud", "longitud"};	
+	private static final String[] COLUMNS_CONTACT = {"ID","Nombre", "Apellidos", "Telefono","Email","Direccion", "URL", "latitud", "longitud"};	
 	
 	
 	public CreateDb(Context context) {
