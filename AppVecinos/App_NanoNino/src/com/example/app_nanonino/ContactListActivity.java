@@ -12,6 +12,10 @@ import java.util.Locale;
 
 
 
+
+
+import com.example.app_nanonino.Fragment_Lista.CallbackMostrarDetalle;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
@@ -33,9 +37,17 @@ import android.widget.Toast;
 
 
 public class ContactListActivity extends ActionBarActivity implements
-		ActionBar.TabListener,OnQueryTextListener {
+		ActionBar.TabListener,OnQueryTextListener,CallbackMostrarDetalle {
 
-	
+	public final static String EXTRA_ID = "ObjVecinos.ID"; 
+	public final static String EXTRA_NOMBRE = "ObjVecinos.NOMBRE";
+	public final static String EXTRA_APELLIDO = "ObjVecinos.APELLIDO";
+	public final static String EXTRA_TELEFONO = "ObjVecinos.TELEFONO";
+	public final static String EXTRA_EMAIL = "ObjVecinos.EMAIL";
+	public final static String EXTRA_DIRECCION = "ObjVecinos.DIRECCION";
+	public final static String EXTRA_URL = "ObjVecinos.URL";
+	public final static String EXTRA_LATITUD = "ObjVecinos.LATITUD";
+	public final static String EXTRA_LONGITUD = "ObjVecinos.LONGITUD";
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	
 
@@ -211,7 +223,7 @@ public class ContactListActivity extends ActionBarActivity implements
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
+			// Muestra tres pestañas
 			return 3;
 		}
 
@@ -242,11 +254,24 @@ public class ContactListActivity extends ActionBarActivity implements
 		return false;
 	}
 
-//	@Override
-	//public void CallBackDetalle(Fragment detalle) {
-	//getSupportFragmentManager().beginTransaction().replace(R.layout.activity_contact_list, detalle).commit();		                
-	
-//	}
+	@Override
+	public void CallBackDetalle(ObjVecinos contact) {
+		if(contact!=null)
+		{
+		Intent intent=new Intent(this,DetalleActivity.class);
+		intent.putExtra(EXTRA_ID, contact.getId());
+		intent.putExtra(EXTRA_NOMBRE, contact.getNombre());
+		intent.putExtra(EXTRA_APELLIDO, contact.getApellido());
+		intent.putExtra(EXTRA_TELEFONO, contact.getTelefono());
+		intent.putExtra(EXTRA_EMAIL, contact.getEmail());
+		intent.putExtra(EXTRA_DIRECCION, contact.getDireccion());
+		intent.putExtra(EXTRA_URL, contact.getUrl());
+		intent.putExtra(EXTRA_LATITUD, contact.getLat());
+		intent.putExtra(EXTRA_LONGITUD, contact.getLongt());
+		startActivity(intent);
+		}
+	}
+
 
 
 }

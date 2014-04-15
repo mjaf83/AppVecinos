@@ -7,5 +7,173 @@
 	android:paddingRight="@dimen/activity_horizontal_margin"
 	android:paddingTop="@dimen/activity_vertical_margin"
 	tools:context="com.example.app_nanonino.DetalleActivity$PlaceholderFragment" >
+	<TextView
+		android:id="@+id/TextView01"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/View02"
+		android:layout_alignLeft="@+id/View02"
+		android:text="Teléfono"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+		<TextView
+		android:id="@+id/TextView03"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/View01"
+		android:layout_alignLeft="@+id/View01"
+		android:text="Dirección"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+		<TextView
+		android:id="@+id/TextView04"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/View04"
+		android:layout_alignLeft="@+id/View04"
+		android:text="Nombre"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	<View
+		android:id="@+id/View03"
+		android:layout_width="wrap_content"
+		android:layout_height="2dp"
+		android:layout_above="@+id/View01"
+		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="69dp"
+		android:background="@drawable/rectangulo" />
+
+	<View
+		android:id="@+id/View02"
+		android:layout_width="wrap_content"
+		android:layout_height="2dp"
+		android:layout_above="@+id/View03"
+		android:layout_alignLeft="@+id/View03"
+		android:layout_marginBottom="69dp"
+		android:background="@drawable/rectangulo" />
+		<View
+		android:id="@+id/View04"
+		android:layout_width="wrap_content"
+		android:layout_height="2dp"
+		android:layout_above="@+id/View02"
+		android:layout_alignLeft="@+id/View02"
+		android:layout_marginBottom="69dp"
+		android:background="@drawable/rectangulo" />
+
+	<TextView
+		android:id="@+id/TelefonoDetalle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/View02"
+		android:layout_alignTop="@+id/View02"
+		android:layout_marginLeft="11dp"
+		android:layout_marginTop="12dp"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	<TextView
+		android:id="@+id/TextView02"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/View03"
+		android:layout_alignLeft="@+id/View03"
+		android:text="Email"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	<View
+		android:id="@+id/View01"
+		android:layout_width="wrap_content"
+		android:layout_height="2dp"
+		android:layout_alignLeft="@+id/View03"
+		android:layout_alignParentBottom="true"
+		android:layout_marginBottom="120dp"
+		android:background="@drawable/rectangulo" />
+	
+		<TextView
+		android:id="@+id/EmailDetalle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/View03"
+		android:layout_alignTop="@+id/View03"
+		android:layout_marginLeft="11dp"
+		android:layout_marginTop="12dp"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+		<TextView
+		android:id="@+id/DireccionDetalle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/View01"
+		android:layout_alignTop="@+id/View01"
+		android:layout_marginLeft="11dp"
+		android:layout_marginTop="12dp"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+		<TextView
+		android:id="@+id/NombreDetalle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/View04"
+		android:layout_alignTop="@+id/View04"
+		android:layout_marginLeft="11dp"
+		android:layout_marginTop="12dp"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+		<Button
+			android:id="@+id/button3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBaseline="@+id/button2"
+			android:layout_alignBottom="@+id/button2"
+			android:layout_toLeftOf="@+id/button2"
+			android:text="Email" 
+			android:background="@drawable/button"
+			android:textColor="#313131"
+			android:layout_marginRight="8dp"
+			android:textAppearance="?android:attr/textAppearanceMedium"/>
+			
+		<Button
+			android:id="@+id/button4"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBaseline="@+id/button3"
+			android:layout_alignBottom="@+id/button3"
+			android:layout_toLeftOf="@+id/button3"
+			android:text="Llamar" 
+			android:background="@drawable/button"
+			 android:textColor="#313131"
+			 android:layout_marginRight="8dp"
+			android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+		<Button
+			android:id="@+id/button2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBaseline="@+id/button1"
+			android:layout_alignBottom="@+id/button1"
+			android:layout_toLeftOf="@+id/button1"
+			android:layout_marginRight="8dp"
+			android:text="Guardar"
+			android:background="@drawable/button"
+			 android:textColor="#313131"
+			android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<Button
+			android:id="@+id/button1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignRight="@+id/View01"
+			android:layout_below="@+id/DireccionDetalle"
+			android:layout_marginRight="14dp"
+			android:layout_marginTop="18dp"
+			android:text="Ver"
+			android:background="@drawable/button"
+			 android:textColor="#313131"
+			android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<ImageView
+			android:id="@+id/imageContact2"
+			android:layout_width="80dp"
+			android:layout_height="80dp"
+			android:layout_above="@+id/TextView04"
+			android:layout_alignRight="@+id/TextView03"
+			android:adjustViewBounds="true"
+			android:contentDescription="Imagen2"
+			android:scaleType="fitXY"
+			android:src="@android:drawable/ic_menu_gallery" />
 
 </RelativeLayout>

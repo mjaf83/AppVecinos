@@ -17,6 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,6 +36,7 @@ import android.widget.TextView;
 
 
 public  class Fragment_Lista extends Fragment{
+	CallbackMostrarDetalle mCallback;
 	
 
 	public final static String EXTRA_ID = "ObjVecinos.ID"; 
@@ -46,12 +49,11 @@ public  class Fragment_Lista extends Fragment{
 	public final static String EXTRA_LATITUD = "ObjVecinos.LATITUD";
 	public final static String EXTRA_LONGITUD = "ObjVecinos.LONGITUD";
 	
-	 private static ViewGroup container;
-	 private static LayoutInflater inflater;
 	 private ObjVecinosAdapter adapter;
 	 private ArrayList<ObjVecinos> listadoVecinos;
 	 private ListView viewVecinos;
 	 private ConexionServidor myasynctask;
+	 private static Activity context;
 
 	 //private CallbackMostrarDetalle mCallbacks;
 	//El contructor debe ir vacio en un fragment
@@ -100,28 +102,14 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	viewVecinos.setOnItemClickListener(new OnItemClickListener() { 
 			@Override
 			public void onItemClick(AdapterView<?> p, View view, int posicion, long id) {
-				DetalleActivity detalle;
-				Intent intent = new Intent(getActivity(), DetalleActivity.class);
-				     
-				Bundle arguments=new Bundle();
-				ObjVecinos contact = listadoVecinos.get(posicion);
-				intent.putExtra(EXTRA_ID, contact.getId());
-				intent.putExtra(EXTRA_NOMBRE, contact.getNombre());
-				intent.putExtra(EXTRA_APELLIDO, contact.getApellido());
-				intent.putExtra(EXTRA_TELEFONO, contact.getTelefono());
-				intent.putExtra(EXTRA_EMAIL, contact.getEmail());
-				intent.putExtra(EXTRA_DIRECCION, contact.getDireccion());
-				intent.putExtra(EXTRA_URL, contact.getUrl());
-				intent.putExtra(EXTRA_LATITUD, contact.getLat());
-				intent.putExtra(EXTRA_LONGITUD, contact.getLongt());
-				startActivity(intent);
-			  
+				mCallback.CallBackDetalle(listadoVecinos.get(posicion));
 			}
 
       });
 		
 	return rootView;
 }
+
 
 
 
@@ -198,9 +186,24 @@ private class ConexionServidor extends AsyncTask<String, Void, String> {
 		
 
 	}
-/*
+
 public interface CallbackMostrarDetalle{
-public  void CallBackDetalle(Fragment detalle);
+	public  void CallBackDetalle(ObjVecinos detalle);
 }
-	*/	
+	
+@Override
+public void onAttach(Activity activity) {
+    super.onAttach(activity);
+    try {
+        mCallback = (CallbackMostrarDetalle) activity;
+    } 
+    catch (ClassCastException e) {
+        throw new ClassCastException(activity.toString()
+                + " must implement CallbackMostrarDetalle");
+    }
 }
+
+}
+
+
+

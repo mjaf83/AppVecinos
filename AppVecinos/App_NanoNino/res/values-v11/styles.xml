@@ -8,7 +8,5 @@
 		<!-- API 11 theme customizations can go here. -->
 	</style>
    <!-- Tema para el color de las letras del login(verde) -->
-    <style name="ColorTema" parent="AppBaseTheme">                
-        <item name="backgroundStacked">#6B8F23</item>
-    </style>
+    
 </resources>

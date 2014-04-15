@@ -9,7 +9,7 @@
 	<string name="usuarioText">Usuario: </string>
 	<string name="title_activity_contact">CONTACTOS</string>
 	<string name="coma">,</string>
-	<string name="title_activity_contact_list">ContactListActivity</string>
+	<string name="title_activity_contact_list">Contactos</string>
 	<string name="title_section1">Contactos</string>
 	<string name="title_section2">Guardados</string>
 	<string name="title_section3">Section 3</string>
